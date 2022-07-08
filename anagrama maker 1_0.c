@@ -44,11 +44,14 @@ void quantificador(char anagrama[]){ //choose == 0 -> quantidade de anagramas ex
         resultado=0;
     else if(n==strlen(anagrama) && n > 1)  //avalia se a palavra fornecida tem todas as letras iguais, se sim, apenas 1 dos anagramas não é repetição
         resultado = size-1;
-    else if(n != strlen(anagrama)) //avalia a quantidade de repetições em um anagrama complexo
-        resultado = size/multi_repeat;
+    else if(n != strlen(anagrama)){ //avalia a quantidade de repetições em um anagrama complexo
+        i = size;
+        resultado = i/multi_repeat;
+        resultado = size - i;
+    }
     if(multi_repeat==1) //avalia se a palavra fornecida não tem nenhuma repetição
         resultado=0;
-    for(i=0;clone[i] != '\0';i++){ //copia a palavra (útil apenas caso deseje retornar o anagrama)
+    for(i=0;clone[i] != '\0';i++){ //recupera a palavra (útil apenas caso deseje retornar o anagrama)
         anagrama[i] = clone[i];
     }
     printf("Total de anagramas: %d\nTotal de anagramas repetidos: %d",size,resultado);
@@ -84,7 +87,7 @@ int main(){
                 posicao = 1;                                                      //                     X b c a d
             }                                                                     //                     X b c d a
             else{                                                                 //                     X a c d b (por fim, o ultimo termo troca com o 1º depois de X
-                trocador = change[posicao];
+                trocador = change[posicao];                                       //                     X b c d a (e recomeça o processo, porque posicao = i)
                 change[posicao] = change[posicao+1];
                 change[posicao+1] = trocador;
                 if(posicao<i){
@@ -95,11 +98,10 @@ int main(){
         printf("\n");
         printf("\n");
         posicao=1;
-        r=1;
-        for(j=0;j<10;j++){                                                    // faz a troca da primeira letra (termo X)
+        for(j=0;j<10;j++){                                                    // recupera a palavra original para ser usada na próxima operação (troca da primeira letra)
             change[j] = anagram[j];
         }
-            trocador = change[0];
+            trocador = change[0];                                            //A primeira letra é trocada de acordo com o valor de Z -->  A x b c d
             change[0] = anagram[z];
             change[z] = trocador;
             z++;
