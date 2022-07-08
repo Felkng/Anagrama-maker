@@ -3,7 +3,7 @@
 void quantificador(char anagrama[]){ //choose == 0 -> quantidade de anagramas existente // choose == 1 -> quantidade de anagramas repetidos
     char clone[10];
     int repetida[10];
-    int i,j,n;
+    int i,j,n, o;
     int size,multi_repeat=1, resultado=0;
     size = strlen(anagrama);
     for(i=0;i<10;i++) //tira o lixo de memória do vetor repetida[]
@@ -40,14 +40,15 @@ void quantificador(char anagrama[]){ //choose == 0 -> quantidade de anagramas ex
             break;
         size *= i;
     }
+    o = multi_repeat;
     if(size==1) //avalia se a palavra fornecida tem apenas uma letra, se sim, a palavra não tem repetição
         resultado=0;
     else if(n==strlen(anagrama) && n > 1)  //avalia se a palavra fornecida tem todas as letras iguais, se sim, apenas 1 dos anagramas não é repetição
         resultado = size-1;
     else if(n != strlen(anagrama)){ //avalia a quantidade de repetições em um anagrama complexo
         i = size;
-        resultado = i/multi_repeat;
-        resultado = size - i;
+        resultado = i/o;
+        resultado = size - resultado;
     }
     if(multi_repeat==1) //avalia se a palavra fornecida não tem nenhuma repetição
         resultado=0;
@@ -83,7 +84,7 @@ int main(){
             if(posicao==i){
                 trocador = change[1];                                             //lógica das trocas -->  (ex de 5 letras)
                 change[1] = change[posicao];                                      //                     X a b c d         (faz-se a troca dos termos depois de X
-                change[posicao] = trocador;                                       //                     X b a c d          
+                change[posicao] = trocador;                                       //                     X b a c d
                 posicao = 1;                                                      //                     X b c a d
             }                                                                     //                     X b c d a
             else{                                                                 //                     X a c d b (por fim, o ultimo termo troca com o 1º depois de X
