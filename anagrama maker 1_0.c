@@ -65,7 +65,7 @@ void quantificador(char anagrama[]){ //choose == 0 -> quantidade de anagramas ex
 int main(){
     char anagram[10];
     int i=0, posicao=1, n=0,z=1;
-    int tamanho,piu=1,j,f;
+    int tamanho,piu=1,j,f,r;
     char change[10], trocador, x,l;
     scanf("%s",anagram);
     fflush(stdin);
@@ -79,7 +79,8 @@ int main(){
     f=tamanho;
     for(i=tamanho-1 ; f>0 ; f--){
         for(n=piu;n>0;n--){
-            printf("%s",change); //imprime o anagrama
+            for(r=0;change[r] != '\0';r++)
+                printf("%c",change[r]); //imprime o anagrama  
             printf(" ");
             if(posicao==i){
                 trocador = change[1];                                             //lógica das trocas -->  (ex de 5 letras)
